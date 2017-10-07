@@ -15,23 +15,18 @@
       </div>
     </form>
     <br>
+
     <div>
       <h3>
         Pending Todos 
       </h3>
       <ul class="list-group">
-        <li 
+        <todo 
           v-for="(todo, index) in pendingTodos"
           :key="index"
-          class="list-group-item">
-          {{ todo.description}} ->
-          {{ todo.done ? 'yep :D ' : 'nou :v '  }}
-          <button 
-            v-on:click="toggle(todo)"
-            class="btn btn-sm btn-primary float-right" >  
-            toggle!
-          </button>
-          </li>
+          :description="todo.description"
+          :done="todo.done"
+          @onToggle="pendingToggle(todo)" />
       </ul>
     </div>
     <br>
@@ -39,26 +34,40 @@
         Completed Todos 
     </h3
     <ul class="list-group">
-      <li 
+      <todo 
         v-for="(todo, index) in completedTodos"
         :key="index"
-        class="list-group-item">
-        {{ todo.description}} ->
-        {{ todo.done ? 'yep :D ' : 'nou :v '  }}
-        <button 
-          v-on:click="toggle(todo)"
-          class="btn btn-sm btn-primary float-right" >  
-          toggle!
-        </button>
-        </li>
+        :description="todo.description"
+        :done="todo.done"
+        @onToggle="completedToggle(todo)"/> 
+    </ul>
+
+    <br>
+    <h3>
+        All Todos 
+    </h3
+    <ul class="list-group">
+      <todo 
+        v-for="(todo, index) in todos"
+        :key="index"
+        :description="todo.description"
+        :done="todo.done"
+        @onToggle="completedToggle(todo)"/> 
     </ul>
   </div>
 </template>
 
 <script>
+  import Todo from "./Todo"
   export default {
+    components:{
+      Todo 
+    },
     methods:{
-      toggle (todo){
+      pendingToggle (todo){
+        todo.done = !todo.done
+      }, 
+      completedToggle (todo){
         todo.done = !todo.done
       }, 
       addTodo(){
