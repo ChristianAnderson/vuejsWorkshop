@@ -1,6 +1,9 @@
 <template>
     <li 
         class="list-group-item">
+        <button>
+            x
+        </button>
         {{ description}} ->
         {{ done ? 'yep :D ' : 'nou :v '  }}
         <button 
@@ -15,7 +18,8 @@ export default {
   props: {
       description:{
           type: String,
-          required: true
+          required: true,
+          validator: (value) => value.length
       },
       done:{
           type: Boolean,

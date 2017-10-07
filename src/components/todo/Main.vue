@@ -2,18 +2,9 @@
   <div class="container">
     <h1>TO DO </h1>
 
-    <form v-on:submit.prevent="addTodo">
-      <div class="input-group">
-        <input 
-          v-model="newTodo"
-          type="text" 
-          class="form-control" 
-          placeholder="Add todo..">
-        <span class="input-group-btn" id="basic-addo">
-           <button class="btn btn-success"> Add + </button>
-        </span>
-      </div>
-    </form>
+    <addTodo @onAddTodo="addTodo()"/>
+
+    
     <br>
 
     <div>
@@ -58,10 +49,12 @@
 </template>
 
 <script>
+  import addTodo from "./addTodo"
   import Todo from "./Todo"
   export default {
     components:{
-      Todo 
+      Todo,
+      addTodo 
     },
     methods:{
       pendingToggle (todo){
@@ -79,6 +72,9 @@
           done: false  
         });
         this.newTodo = ""
+      },
+      remove (todo) {
+        this.todos.splice(this.todos.indexOf(todo), 1)
       }   
     },
 
