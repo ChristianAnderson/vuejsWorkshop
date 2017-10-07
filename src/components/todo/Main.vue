@@ -64,6 +64,7 @@
         todo.done = !todo.done
       }, 
       addTodo(){
+        console.log(this.newTodo);
         if(!this.newTodo){
           return
         }

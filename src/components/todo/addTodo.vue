@@ -1,5 +1,5 @@
 <template>
-  <form v-on:submit.prevent="addTodo">
+  <form v-on:submit.prevent="addTodo()">
       <div class="input-group">
         <input 
           v-model="newTodo"
@@ -22,7 +22,7 @@ export default {
   },
   methods:{
       addTodo(){
-          this.$emit('addTodo')
+          this.$emit('onAddTodo')
       }
   }
 }
